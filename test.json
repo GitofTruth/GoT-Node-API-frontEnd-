@@ -1,0 +1,34 @@
+[
+    {
+        "repoName" : "Website-Template",
+        "author" : "merola",
+        "commits" : [ "firstcommit", "secondcommit", "thirdcommit"] 
+    },
+    
+     {
+        "repoName" : "DocumentBinarizationTechniques_ComputerVision",
+        "author" : "merola",
+        "commits" : [ "firstcommit", "secondcommit", "thirdcommit"]
+    },
+     {
+        "repoName" : "GoT",
+        "author" : "merola",
+        "commits" : [ "firstcommit", "secondcommit", "thirdcommit"]
+    },
+    {
+        "repoName" : "HyperledgerFabric",
+        "author" : "merola",
+        "commits" : [ "firstcommit", "secondcommit", "thirdcommit"]
+    },
+    {
+        "repoName" : "restFULAPi",
+        "author" : "merola",
+        "commits" : [ "firstcommit", "secondcommit", "thirdcommit"]
+    },
+    {
+        "repoName" : "Java_OOP",
+        "author" : "merola",
+        "commits" : [ "firstcommit", "secondcommit", "thirdcommit"]
+    }
+]
+

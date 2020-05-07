@@ -1,0 +1,30 @@
+  {
+    "id": 1,
+    "Name": "rooter",
+    "address": "12345",
+    "gender": "UK",
+    "designation": "sac@gmail.com",
+    "age":"40";
+  },
+  {
+    "UserID": 2,
+    "UserName": "binu",
+    "Password": "123",
+    "Country": "uk",
+    "Email": "Binu@gmail.com"
+  },
+  {
+    "UserID": 3,
+    "UserName": "cal",
+    "Password": "123",
+    "Country": "uk",
+    "Email": "cal@gmail.com"
+  },
+  {
+    "UserID": 4,
+    "UserName": "nera",
+    "Password": "1234",
+    "Country": "uk",
+    "Email": "nera@gmail.com"
+  }
+];
