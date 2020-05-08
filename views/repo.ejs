@@ -120,7 +120,7 @@
                                 <%content.folders.forEach (function(folder){ %>
                                 <tr class="row100 body"> 
                                     
-									<td class="cell100 column1" href="/user/repo/:repoName?folder=<%= folder %>"><i class="glyphicon glyphicon-folder-open">&nbsp;</i> <a href="#"><%= folder %></a></td>
+									<td class="cell100 column1" ><i class="glyphicon glyphicon-folder-open">&nbsp;</i> <a href="/user/dir?repoName=<%= folder.path%>"> <%= folder.name %></a></td>
                                     <td class="cell100 column3">commit</td>
                                     <td class="cell100 column5">2 days ago</td>
 								</tr>
@@ -128,7 +128,7 @@
                            <%content.files.forEach (function(file){ %>
                             <tr class="row100 body"> 
                                 
-                                <td class="cell100 column1" ><i class="glyphicon glyphicon-list-alt">&nbsp;</i> <a href="/user/repoFile"><%= file %></a></td>
+                                <td class="cell100 column1" ><i class="glyphicon glyphicon-list-alt">&nbsp;</i> <a href="/user/repoFile?fileName=<%= file.path%>"><%= file.name %></a></td>
                                 <td class="cell100 column3">commit</td>
                                 <td class="cell100 column5">2 days ago</td>
                             </tr>

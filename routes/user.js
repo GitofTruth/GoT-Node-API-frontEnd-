@@ -6,10 +6,10 @@ const router = express.Router();
 const user = require ('../models/user');
 const fs = require('fs');
 const url = require('url');
+const path = require('path');
 const readFiles = require('../models/repoFolder');
-//const path = require("path");
 
-var path = require('path');
+//const path = require("path");
 router.use(express.static(path.join(__dirname, '../public')));
 // router.use (express.static(path.join(__dirname, '../repositories')));
 
@@ -20,7 +20,7 @@ router.get('/profile', (req, res) => {
     res.send('profile');
 
 });
-router.post('/repositories',  function(req, res){
+router.get('/repositories',  function(req, res){
         let file = fs.readFileSync('test.json');
         let repos = JSON.parse(file);
         res.render('user_repos', {repos});
@@ -35,32 +35,75 @@ function parsePath(path){
   return pathNames
 }
 
-lineReader.eachLine('/path/to/file', function(line) {
-  console.log(line);
-});
+
 
 router.get('/repoFile', (req,res)=>{
-  //var filePath = req.query.path;
-  //fs.readFile(filePath, function(err, data) {
-    
-  let fileUrl = url.pathToFileURL("C:/xampp/htdocs/udemyCourseJSON/table.html");
+  var filePath = toString(req.query.path);
+  fs.readFile(filePath, function(err, data) {
+    var file = toString(data);
+  //let fileUrl = url.pathToFileURL("C:/xampp/htdocs/udemyCourseJSON/table.html");
   //let path = "C:/xampp/htdocs/temp/test.txt";
-   res.render('test',{file: fileUrl.href});  
+   res.render('file',{file});  
    //console.log(fileUrl.href);
-   //console.log(data);
+   console.log(data);
   //})
+  })
 });
-
-
 
 
 router.get('/repo', function(req, res)  {
+  // read director
+  var repo = req.query.repoName; 
+ console.log("Repo Name " + repo)
+  const fs = require('fs');
+  var content = {folders: [] , files:[] };
+  const dir = "./repositories/" + repo ;
+  path1 = path.parse(toString(repo));
+ console.log(path1);
+
+  fs.readdir(dir, (error, fileNames) => {
+   if (error) throw error;
+   fileNames.forEach(filename => {
+     // get current file name
+     const name = path.parse(filename).name;
+     // get current file extension
+     const ext = path.parse(filename).ext;
+     // get current file path
+     const filepath = path.resolve(dir, filename);
+    
+     var pathNames = parsePath(filepath);
+     content.pathList  = pathNames;
+   
+     // get information about the file  
+       var stats = fs.statSync(filepath);
+       // check if the current path is a file or a folder
+       const isFile = stats.isFile();
+       // exclude folders
+       if (isFile) {
+         // callback, do something with the file
+         content.files.push({path: filepath , name: name});
+
+       }
+       else{
+       
+         content.folders.push ({path: filepath , name: name});
+       }
+   });
+   console.log(content.folders);
+   res.render('repo',{content});
+ }); 
+});
+
+router.get('/dir', function(req, res)  {
    // read director
    var repo = req.query.repoName; 
   console.log("Repo Name " + repo)
    const fs = require('fs');
-   var content = {folders:[] , files:[] };
-   const dir = "./repositories/" + repo ;
+   var content = {folders: [] , files:[] };
+   const dir = repo ;
+   path1 = path.parse(toString(repo));
+  console.log(path1);
+
    fs.readdir(dir, (error, fileNames) => {
     if (error) throw error;
     fileNames.forEach(filename => {
@@ -70,9 +113,10 @@ router.get('/repo', function(req, res)  {
       const ext = path.parse(filename).ext;
       // get current file path
       const filepath = path.resolve(dir, filename);
+     
       var pathNames = parsePath(filepath);
       content.pathList  = pathNames;
-      content.path = filepath;
+    
       // get information about the file  
         var stats = fs.statSync(filepath);
         // check if the current path is a file or a folder
@@ -80,10 +124,11 @@ router.get('/repo', function(req, res)  {
         // exclude folders
         if (isFile) {
           // callback, do something with the file
+          router.get('/repofile');
           content.files.push(filename);
         }
         else{
-          content.folders.push(filename);
+          content.folders.push ({path: filepath , name: name});
         }
     });
     console.log(content.folders);

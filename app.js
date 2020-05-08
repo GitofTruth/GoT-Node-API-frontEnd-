@@ -21,7 +21,28 @@ app.use('/user',UserRouter);
 
 //routes
 app.get('/', (req, res) => {
-     res.send('we are on home');
+     res.render('index');
+
+});
+
+app.get('/team', (req, res) => {
+  res.render('team');
+
+});
+app.get('/documentation', (req, res) => {
+  res.render('documentation');
+
+});
+app.get('/contact', (req, res) => {
+  res.render('contact');
+
+});
+app.get('/login', (req, res) => {
+  res.render('login');
+
+});
+app.get('/register', (req, res) => {
+  res.render('register');
 
 });
 
